@@ -1,0 +1,22 @@
+<h2><%= @list.name %></h2>
+
+
+<% @list.bookmarks.each do |bm| %>
+  <div>
+   <%= image_tag bm.movie.poster_url, alt: bm.movie.title, width: 400 %>
+    <div><%= bm.movie.title  %></div>
+    <div><%= bm.comment %></div>
+    <%= link_to "delete", bookmark_path(bm), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{bm.movie.title} from your #{@list.name} list"} %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+<%= link_to "Add a new bookmark", new_list_bookmark_path(@list)%>
+<%= link_to "Back to list", "/lists" %>
+<%= link_to "Delete this list", list_path(@list), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this list?" } %>
